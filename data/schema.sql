@@ -9,8 +9,11 @@ CREATE TABLE projects (
   status ENUM('active','inactive') DEFAULT 'inactive',
   last_run_time INT DEFAULT NULL,
 
+  target_db_type VARCHAR(32) DEFAULT 'mysql',
   target_username VARCHAR(64) DEFAULT 'root',
   target_password VARCHAR(64) DEFAULT '',
+  source_db_type VARCHAR(32) DEFAULT 'mysql',
+  source_pk VARCHAR(64) DEFAULT 'id',
   source_username VARCHAR(64) DEFAULT 'root',
   source_password VARCHAR(64) DEFAULT '',
   rows_per_run INT DEFAULT 10,
