@@ -8,9 +8,14 @@
  */
 CLASS debug EXTENDS add_debug {
 
+   static $log = "";
+
    public static function log($log) {
 
-      echo $log."\r\n";
+      $log = $log."\r\n";
+      static::$log .= $log;
+
+      echo $log;
 
    }
 }
