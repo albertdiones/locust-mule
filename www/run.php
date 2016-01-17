@@ -7,6 +7,8 @@
  * 5. done and log
  */
 
+require "add_configure.php";
+echo "running run.php ";
 # 1. Connects to source database
 
 
@@ -24,5 +26,4 @@
 
 
 # 5. done and log
-
 
