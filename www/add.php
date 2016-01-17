@@ -6,8 +6,7 @@
  * Time: 3:41 AM
  */
 
-require 'config.php';
-require $C->add_dir.'/init.php';
+require 'add_configure.php';
 
 
 $current_controller = add::current_controller();
