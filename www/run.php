@@ -8,7 +8,11 @@
  */
 
 require "add_configure.php";
-echo "running run.php ";
+debug::log("run.php - " .date ("h:i:s d-m-Y"));
+
+# Gets an active project
+$project = project::get_one(array('status' => 'active'),'last_run_time ASC');
+
 # 1. Connects to source database
 
 
