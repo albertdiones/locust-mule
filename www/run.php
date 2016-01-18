@@ -17,7 +17,7 @@ $project = project::get_one(array('status' => 'active'),'last_run_time ASC');
 # 1. Connects to source database
 # 2. Checks the source table for Rows Per Run number of rows that is greater than Last Id (ordered by id ASC)
 $source_db = new source_target_adodb(ADONewConnection($project->source_db_type));
-$source_db->Connect($project->source_host, $project->source_username, $project->target_password);
+$source_db->Connect($project->source_host, $project->source_username, $project->source_password);
 $source_model = (string) new fluid_model($project->source_table,$project->source_table_pk,$source_db);
 $source_data = $source_model::get_where_order_page(
    $source_model::table_pk().' > '. $source_model::db()->quote($project->last_id),
