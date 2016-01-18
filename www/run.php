@@ -43,7 +43,7 @@ $count = count($source_data);
 debug::log("Fetched rows from source - count: " . $count);
 
 if (!$count) {
-   #$project->status = 'inactive';
+   $project->status = 'inactive';
    throw new e_system("Warning: no rows fetched from source table");
 }
 
