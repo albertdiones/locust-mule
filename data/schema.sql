@@ -1,11 +1,15 @@
 
 CREATE DATABASE locust_mule;
 
+USE locust_mule;
+
+-- DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
   target_table VARCHAR(128),
   target_host VARCHAR(64),
   source_table VARCHAR(128),
   source_host VARCHAR(64) DEFAULT 'localhost',
+
   status ENUM('active','inactive') DEFAULT 'inactive',
   last_run_time INT DEFAULT NULL,
 
@@ -19,12 +23,13 @@ CREATE TABLE projects (
   rows_per_run INT DEFAULT 10,
   last_id VARCHAR(64) DEFAULT NULL,
   insert_time INT DEFAULT NULL,
-  update_time INT DEFAULT NULL
+  update_time INT DEFAULT NULL,
+  PRIMARY KEY (target_table,target_host,source_table,source_host)
 );
 
 CREATE TABLE run_logs (
-  id INT,
-
-  log LONGTEXT,
-  insert_time INT
-)
+  id          INT,
+  log         LONGTEXT,
+  insert_time INT,
+  PRIMARY KEY (id)
+);

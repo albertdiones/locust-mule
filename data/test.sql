@@ -11,7 +11,7 @@ CREATE TABLE fruits
 ;
 
 INSERT INTO fruits(`fruit`)
-VALUES('orange'),('apple'),('banana');
+VALUES('orange'),('apple'),('banana'),('mango'),('dalandan');
 
 CREATE DATABASE locust_mule_test2;
 
@@ -25,11 +25,12 @@ CREATE TABLE fruits
 
 USE locust_mule;
 INSERT INTO projects
-(`target_table`,`target_host`,`source_table`,`source_host`)
+(`target_table`,`target_host`,`source_table`,`source_host`,`rows_per_run`)
     VALUES
       (
         'locust_mule_test2.fruits','localhost',
-        'locust_mule_test.fruits','localhost'
+        'locust_mule_test.fruits','localhost',
+        1
       )
 ;
 -- update credentials after (or host)
