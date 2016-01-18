@@ -3,7 +3,8 @@ CREATE DATABASE locust_mule;
 
 USE locust_mule;
 
--- DROP TABLE IF EXISTS projects;
+--
+DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
   target_table VARCHAR(128),
   target_host VARCHAR(64),
@@ -28,8 +29,9 @@ CREATE TABLE projects (
   PRIMARY KEY (target_table,target_host,source_table,source_host)
 );
 
+DROP TABLE run_logs;
 CREATE TABLE run_logs (
-  id          INT,
+  id          INT AUTO_INCREMENT,
   log         LONGTEXT,
   insert_time INT,
   PRIMARY KEY (id)
