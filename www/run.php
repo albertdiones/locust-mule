@@ -16,7 +16,7 @@ $project = project::get_one(array('status' => 'active'),'last_run_time ASC');
 
 # 1. Connects to source database
 # 2. Checks the source table for Rows Per Run number of rows that is greater than Last Id (ordered by id ASC)
-$source_db = new add_adodb(ADONewConnection($project->source_db_type));
+$source_db = new source_target_adodb(ADONewConnection($project->source_db_type));
 $source_db->Connect($project->source_host, $project->source_username, $project->target_password);
 $source_model = (string) new fluid_model($project->source_table,$project->source_table_pk,$source_db);
 $source_data = $source_model::get_where_order_page(
@@ -27,11 +27,9 @@ $source_data = $source_model::get_where_order_page(
 
 debug::log("Fetched rows from source - count: " . count($source_data));
 
-
-
 # 3. Connects to the target database
 # 4. Inserts the rows to target table
-$target_db = new add_adodb(ADONewConnection($project->target_db_type));
+$target_db = new source_target_adodb(ADONewConnection($project->target_db_type));
 $target_db->Connect($project->target_host, $project->target_username, $project->target_password);
 $target_model = (string) new fluid_model($target->target_table,$target->target_table_pk,$target_db);
 foreach ($source_data as $source_datum) {
