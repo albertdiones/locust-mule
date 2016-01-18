@@ -34,3 +34,5 @@ INSERT INTO projects
       )
 ;
 -- update credentials after (or host)
+
+SELECT * FROM locust_mule_test2.fruits;
