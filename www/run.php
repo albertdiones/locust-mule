@@ -26,7 +26,13 @@ $source_data = $source_model::get_where_order_page(
    1,$project->rows_per_run
 );
 
-debug::log("Fetched rows from source - count: " . count($source_data));
+$count = count($source_data);
+debug::log("Fetched rows from source - count: " . $count);
+
+if (!$count) {
+   #$project->status = 'inactive';
+   throw new e_system("Warning: no rows fetched from source table");
+}
 
 # 3. Connects to the target database
 # 4. Inserts the rows to target table
