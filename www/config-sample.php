@@ -1,8 +1,16 @@
 <?php
-
+/**
+ * Rename to config.php after setting up
+ *
+ */
 $C = (object) array(
+   # Location of this directory
    'root_dir' => dirname(__FILE__),
+   # requires add-framework
+   # https://github.com/albertdiones/add-framework
+   # branch: locust-mule-improvements or master (if merged)
    'add_dir' => dirname(__FILE__).'/includes/add-framework',
+
 
    'environment_status' => 'development', # live or development
    'debug_sql' => false, # shows the sqls (when environment_status = 'development')
