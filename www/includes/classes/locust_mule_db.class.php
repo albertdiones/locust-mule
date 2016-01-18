@@ -7,15 +7,11 @@
  */
 /**
  * The adodb wrapper
- * @todo check the parent class (add_adodb_mysql)
  */
 CLASS locust_mule_db EXTENDS add_adodb_mysql {
 
     /**
      *
-     * @todo change the credentials
-     *
-     * @todo change the db name
      *
      * 
      */
