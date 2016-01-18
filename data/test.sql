@@ -25,12 +25,12 @@ CREATE TABLE fruits
 
 USE locust_mule;
 INSERT INTO projects
-(`target_table`,`target_host`,`source_table`,`source_host`,`rows_per_run`)
+(`target_table`,`target_host`,`source_table`,`source_host`,`rows_per_run`,`status`)
     VALUES
       (
         'locust_mule_test2.fruits','localhost',
         'locust_mule_test.fruits','localhost',
-        1
+        1,'active'
       )
 ;
 -- update credentials after (or host)
