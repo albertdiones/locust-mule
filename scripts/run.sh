@@ -4,7 +4,7 @@
 
 FREE_MEMORY=$(grep MemFree /proc/meminfo |  awk '{print $2}')
 TOTAL_MEMORY=$(grep MemTotal /proc/meminfo |  awk '{print $2}')
-ALLOWANCE_MEMORY=$(printf "%.0f" $(echo "$TOTAL_MEMORY * 0.05" | bc))
+ALLOWANCE_MEMORY=$(printf "%.0f" $(echo "$TOTAL_MEMORY * 0.02" | bc))
 
 while [ True ]
 do
