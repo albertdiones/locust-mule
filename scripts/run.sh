@@ -11,6 +11,8 @@ do
    if [ $FREE_MEMORY -gt $ALLOWANCE_MEMORY ]
    then
       php -f ../www/run.php
+   else
+      echo '.'
    fi
    sleep 3
 done
