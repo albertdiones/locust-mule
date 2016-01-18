@@ -7,9 +7,10 @@
  */
 CLASS run_log EXTENDS model_rwd {
 
-    const TABLE = '';
+    const TABLE = 'run_logs';
+    const TABLE_PK = 'id';
     
     public static function db() {
-        return parent::db();
+        return locust_mule_db::singleton();
     }
 }
