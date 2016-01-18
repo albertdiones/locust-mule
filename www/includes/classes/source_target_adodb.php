@@ -10,6 +10,6 @@ CLASS source_target_adodb EXTENDS add_adodb {
    /**
     */
    public function Connect() {
-      return false;
+      return call_user_func_array(array($this->adodb,'Connect'),func_get_args());
    }
 }

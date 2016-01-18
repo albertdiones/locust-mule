@@ -14,6 +14,7 @@ debug::log("run.php - " .date ("h:i:s d-m-Y"));
 # Gets an active project
 $project = project::get_one(array('status' => 'active'),'last_run_time ASC');
 debug::log("running project: " . $project);
+
 # 1. Connects to source database
 # 2. Checks the source table for Rows Per Run number of rows that is greater than Last Id (ordered by id ASC)
 $source_db = new source_target_adodb(ADONewConnection($project->source_db_type));
