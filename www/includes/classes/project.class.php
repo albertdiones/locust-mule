@@ -5,11 +5,12 @@
  * Date: 1/18/16
  * Time: 3:39 AM
  */
-CLASS project EXTENDS model_rwd {
+CLASS project EXTENDS model_multi_pk {
 
-    const TABLE = '';
+    const TABLE = 'projects';
+    static $TABLE_PKS = array('target_table','target_host','source_table','source_host');
     
     public static function db() {
-        return parent::db();
+        return locust_mule_db::singleton();
     }
 }
