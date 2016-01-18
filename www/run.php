@@ -21,9 +21,20 @@ $source_db = new source_target_adodb(ADONewConnection($project->source_db_type))
 if (!$source_db->Connect($project->source_host, $project->source_username, $project->source_password)) {
    throw new e_system("Failed to connect to source database");
 }
+$source_db->debug = project::db()->debug;
+
 $source_model = (string) new fluid_model($project->source_table,$project->source_pk,$source_db);
+
+debug::log("Source model: ".$source_model);
+debug::log("Source model table: ".$source_model::TABLE);
+#debug::var_dump($source_model::db());
+
+if ($project->last_id !== null) {
+   $source_where = $source_model::table_pk().' > '. $source_model::db()->quote($project->last_id);
+}
+
 $source_data = $source_model::get_where_order_page(
-   $source_model::table_pk().' > '. $source_model::db()->quote($project->last_id),
+   $source_where,
    $source_model::table_pk().' ASC',
    1,$project->rows_per_run
 );
@@ -39,10 +50,16 @@ if (!$count) {
 # 3. Connects to the target database
 # 4. Inserts the rows to target table
 $target_db = new source_target_adodb(ADONewConnection($project->target_db_type));
-$target_db->Connect($project->target_host, $project->target_username, $project->target_password);
+
+if (!$target_db->Connect($project->target_host, $project->target_username, $project->target_password)) {
+   throw new e_system("Failed to connect to target database");
+}
+$source_db->debug = project::db()->debug;
+
 $target_model = (string) new fluid_model($project->target_table,$project->target_pk,$target_db);
 foreach ($source_data as $source_datum) {
    $target_model::add_new($source_datum->data_array());
+   $project->last_id = $source_datum->id();
    debug::log("Inserted row to target: " . $source_datum);
 }
 
