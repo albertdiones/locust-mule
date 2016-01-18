@@ -1,3 +1,4 @@
 www/includes/add-framework
 www/config.php
 data/data.sql
+www/includes/caches/*
