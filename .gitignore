@@ -1,4 +1,4 @@
 www/includes/add-framework
 www/config.php
-data/data.sql
+data/projects/
 www/includes/caches/*
