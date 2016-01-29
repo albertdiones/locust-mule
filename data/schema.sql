@@ -23,7 +23,7 @@ CREATE TABLE projects (
   source_username VARCHAR(64) DEFAULT 'root',
   source_password VARCHAR(64) DEFAULT '',
   rows_per_run INT DEFAULT 10,
-  last_id VARCHAR(64) DEFAULT NULL,
+  last_page INT UNSIGNED DEFAULT 0,
   insert_time INT DEFAULT NULL,
   update_time INT DEFAULT NULL,
   PRIMARY KEY (target_table,target_host,source_table,source_host)

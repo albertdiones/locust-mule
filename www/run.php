@@ -8,7 +8,7 @@
  */
 
 require "add_configure.php";
-ob_start();
+#ob_start();
 debug::log("run.php - " .date ("h:i:s d-m-Y"));
 
 # Gets an active project
@@ -29,15 +29,14 @@ debug::log("Source model: ".$source_model);
 debug::log("Source model table: ".$source_model::TABLE);
 #debug::var_dump($source_model::db());
 
-if ($project->last_id !== null) {
-   $source_where = $source_model::table_pk().' > '. $source_model::db()->quote($project->last_id);
+if ($project->last_page === null) {
+   $project->last_page = 0;
 }
 
-$source_data = $source_model::get_where_order_page(
-   $source_where,
-   $source_model::table_pk().' ASC',
-   1,$project->rows_per_run
-);
+$source_data = $source_model::get_where_order_page(null,null,$project->last_page+1,$project->rows_per_run);
+
+$project->last_page += 1;
+$project->update_db_row();
 
 $count = count($source_data);
 debug::log("Fetched rows from source - count: " . $count);
@@ -57,14 +56,16 @@ if (!$target_db->Connect($project->target_host, $project->target_username, $proj
 $source_db->debug = project::db()->debug;
 
 $target_model = (string) new fluid_model($project->target_table,$project->target_pk,$target_db);
+$inserted_rows = 0;
 foreach ($source_data as $source_datum) {
-   $target_model::add_new($source_datum->data_array());
-   $project->last_id = $source_datum->id();
-   debug::log("Inserted row to target: " . $source_datum);
+   $inserted_rows += (int) (bool) $target_model::add_new($source_datum->data_array());
+   #debug::log("Inserted row to target: " . $source_datum);
 }
+
+debug::log("Inserted rows: ".$inserted_rows);
 
 # 5. done and log
 
-run_log::add_new( array('log' => debug::$log ) );
+run_log::add_new( array('log' => debug::$log,'insert_time' => time() ) );
 
 
